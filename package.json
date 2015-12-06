@@ -1,7 +1,7 @@
 {
   "name": "html-template-tag",
   "version": "0.1.0",
-  "description": "ES6 Tagged Template for pre-compiling HTML templates.",
+  "description": "ES6 Tagged Template for compiling HTML template strings.",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
@@ -41,5 +41,8 @@
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "uglify-js": "^2.5.0"
+  },
+  "dependencies": {
+    "html-es6cape": "^1.0.5"
   }
 }
