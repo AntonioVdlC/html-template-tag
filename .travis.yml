@@ -1,0 +1,29 @@
+sudo: false
+language: node_js
+cache:
+  directories:
+  - node_modules
+branches:
+  only:
+  - master
+notifications:
+  email: false
+node_js:
+- iojs
+before_install:
+- npm i -g npm@^2.0.0
+before_script:
+- npm prune
+script:
+- npm run test
+- npm run coverage:check
+after_success:
+- npm run coverage:report
+#deploy:
+  #provider: npm
+  #email: antonio.villagra.de.la.cruz@gmail.com
+  #api_key:
+    #secure: sQE2jwi5bmXTthmM82WU6aycdbTBoqp8lqXTU13Bl2Mb6wRqE5CuQ24gXG9EXOM7yFXoeQX68UKm0sdiQLGGczVwyIkVnMk0ftUOJhuNL79yRbXDkSGLHEnxFveks99Gujvf5bFUoyHIQDlneT+p7RuuR1ktTQ8j5mNct0OISlvAFgqtx5/UAaS/ujKULCEZDnUI5N1A4yNd+LVgbbJMqwiUUOGy99tXfE7dPYHgNTekFp+fZz2cjuuEFUt0uniEmLW+p9ox2StI5ZOBRbLJJL8U9OlzKyftxftu6L4nGx5sy3j7+7M87n0Uni3Xuqi7/d7nAZ0NgixhFA1NZMtnxma350fn3FEkQP/S5UFyiwW84e4cuE6f2iFNPwEEd+NmtorUj5IiHkrcZBxVOdVxA3CB91pz0hUlJnqfEn8tX0qFMJmKby5FuBffPjbJgDezm4BUub7vKgSzzs/HmiqiXendTS1GZnAN7BZ+DBheUQKM8O44qJYr4zzaHp5fUfiQoqWbJzjqDEwldjMzv4ocB/LOkO1nJG607fRHlW4xIFyyLYufcdQJ0ryxz//zfCbCRu8jGNlPuWi9hlS/D3yGYThdJOg7gTEwkMTFZgibeB4JPVRrqw+9tIN3Z7S2NXQUObt+llUgz37z3pVTh3usTs/QaPMz+QH0B9P5NWk+r0I=
+  #on:
+    #repo: AntonioVdlC/html-template-tag
+  #skip_cleanup: true

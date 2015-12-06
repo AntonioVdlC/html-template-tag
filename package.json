@@ -1,0 +1,45 @@
+{
+  "name": "html-template-tag",
+  "version": "0.1.0",
+  "description": "ES6 Tagged Template for pre-compiling HTML templates.",
+  "main": "dist/index.js",
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "babel src/index.js -o dist/index.js",
+    "postbuild": "uglifyjs dist/index.js -o dist/index.js",
+    "clean": "rm -rf dist && mkdir dist",
+    "coverage:check": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "coverage:report": "cat ./coverage/lcov.info | codecov",
+    "test": "istanbul cover -x *.test.js _mocha -- -R spec --compilers js:babel/register",
+    "test:watch": "mocha -w --compilers js:babel/register",
+    "preversion": "npm run test && npm run coverage:check",
+    "version": "npm run build && git add -A dist",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AntonioVdlC/html-template-tag.git"
+  },
+  "keywords": [
+    "html",
+    "template",
+    "tag",
+    "es6",
+    "string",
+    "literals"
+  ],
+  "author": "Antonio Villagra De La Cruz <antonio.villagra.de.la.cruz@gmail.com> (http://antoniovdlc.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AntonioVdlC/html-template-tag/issues"
+  },
+  "devDependencies": {
+    "babel": "^5.8.29",
+    "chai": "^3.4.0",
+    "codecov.io": "^0.1.6",
+    "istanbul": "^0.4.0",
+    "mocha": "^2.3.3",
+    "uglify-js": "^2.5.0"
+  }
+}
