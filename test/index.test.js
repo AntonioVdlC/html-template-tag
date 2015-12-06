@@ -30,4 +30,10 @@ describe("html-template-tag", () => {
 			expect(html`${key}`).to.equal(chars[key]);
 		});
 	});
+
+	it("should generate valid HTML with an array of values", () => {
+		let names = ["Megan", "Tiphaine", "Florent", "Hoan"];
+
+		expect(html`<div>My best friends are:<ul>${names.map(name => html`<li>${name}</li>`)}</ul></div>`).to.equal("<div>My best friends are:<ul><li>Megan</li><li>Tiphaine</li><li>Florent</li><li>Hoan</li></ul></div>");
+	});
 });
