@@ -5,8 +5,12 @@ import htmlEscape from "html-es6cape";
 export default (literals, ...substs) => {
 	return literals.raw.reduce((acc, lit, i) => {
 		var subst = substs[i - 1];
-		
-		subst = htmlEscape(subst);
+
+		if (Array.isArray(subst)) {
+			subst = subst.join("");
+		} else {
+			subst = htmlEscape(subst);
+		}
 
 		return acc + subst + lit;
 	});
