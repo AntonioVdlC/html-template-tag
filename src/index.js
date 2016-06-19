@@ -8,6 +8,9 @@ export default (literals, ...substs) => {
 
 		if (Array.isArray(subst)) {
 			subst = subst.join("");
+		} else if (acc[acc.length - 1] === "!") {
+			acc = acc.slice(0, -1);
+			subst = String(subst);
 		} else {
 			subst = htmlEscape(subst);
 		}
