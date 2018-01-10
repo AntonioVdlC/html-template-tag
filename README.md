@@ -55,12 +55,9 @@ var string = html`
 
 ### Skip autoscaping
 
-You can use double dolar signs in interpolation to mark the value as safe (which means that this variable will not be escaped).
+You can use double dollar signs in interpolation to mark the value as safe (which means that this variable will not be escaped).
 
 ```javascript
-var html = require("html-template-tag");
-// - or - import html from "html-template-tag";
-
 var name = `<strong>Antonio</strong>`;
 var string = html`Hello, $${name}!`;
 // "Hello, <strong>Antonio</strong>!"
