@@ -31,6 +31,11 @@ describe("html-template-tag", () => {
 		});
 	});
 
+	it("should skip escaping HTML special characters for substituitions with double $", () => {
+		let safeString = "<strong>Antonio</strong>"
+		expect(html`Hello, $${safeString}!`).to.equal("Hello, <strong>Antonio</strong>!");
+	})
+
 	it("should generate valid HTML with an array of values", () => {
 		let names = ["Megan", "Tiphaine", "Florent", "Hoan"];
 

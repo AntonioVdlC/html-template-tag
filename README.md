@@ -53,6 +53,18 @@ var string = html`
 // "<ul><li>Hello, Antonio!</li><li>Hello, Megan!</li><li>Hello, /&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;!</li></ul>"
 ```
 
+### Skip autoscaping
+
+You can use double dollar signs in interpolation to mark the value as safe (which means that this variable will not be escaped).
+
+```javascript
+var name = `<strong>Antonio</strong>`;
+var string = html`Hello, $${name}!`;
+// "Hello, <strong>Antonio</strong>!"
+```
+
+
+
 ### HTML Template Pre-Compiling
 
 This small module can also be used to pre-compile HTML templates:
