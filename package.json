@@ -1,6 +1,6 @@
 {
   "name": "html-template-tag",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "ES6 Tagged Template for compiling HTML template strings.",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
