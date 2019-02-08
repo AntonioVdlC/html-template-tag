@@ -36,6 +36,16 @@ describe("html-template-tag", () => {
 		expect(html`Hello, $${safeString}!`).to.equal("Hello, <strong>Antonio</strong>!");
 	})
 
+	it("should escape HTML special characters if previous substituition ended with $", () => {
+		let insertedDollar = "I :heart: $";
+		let unsafeString = " & €";
+		let emptyString = "";
+		expect(html`${insertedDollar}${unsafeString}!`).to.equal("I :heart: $ &amp; €!");
+		expect(html`${insertedDollar}${emptyString}${unsafeString}!`).to.equal("I :heart: $ &amp; €!");
+		expect(html`${insertedDollar}$${emptyString}${unsafeString}!`).to.equal("I :heart: $ &amp; €!");
+		expect(html`$${insertedDollar}${emptyString}${unsafeString}!`).to.equal("I :heart: $ &amp; €!");
+	})
+
 	it("should generate valid HTML with an array of values", () => {
 		let names = ["Megan", "Tiphaine", "Florent", "Hoan"];
 
