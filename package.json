@@ -12,8 +12,8 @@
     "clean": "rm -rf dist && mkdir dist",
     "coverage:check": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "coverage:report": "cat ./coverage/lcov.info | codecov",
-    "test": "istanbul cover -x *.test.js _mocha -- -R spec --compilers js:babel/register",
-    "test:watch": "mocha -w --compilers js:babel/register",
+    "test": "istanbul cover -x *.test.js _mocha -- -R spec --require babel/register",
+    "test:watch": "mocha -w --require babel/register",
     "preversion": "npm run test && npm run coverage:check",
     "version": "npm run build && git add -A dist",
     "postversion": "git push && git push --tags"
@@ -40,7 +40,7 @@
     "chai": "^3.4.0",
     "codecov.io": "^0.1.6",
     "istanbul": "^0.4.0",
-    "mocha": "^2.3.3",
+    "mocha": "^6.0.2",
     "uglify-js": "^2.5.0"
   },
   "dependencies": {
