@@ -4,6 +4,7 @@
   "description": "ES6 Tagged Template for compiling HTML template strings.",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
+  "module": "src/index.js",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "babel src/index.js -o dist/index.js",
