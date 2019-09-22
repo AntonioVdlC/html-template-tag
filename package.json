@@ -1,6 +1,6 @@
 {
   "name": "html-template-tag",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "ES6 Tagged Template for compiling HTML template strings.",
   "main": "dist/index.js",
   "types": "index.d.ts",
