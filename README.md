@@ -1,8 +1,6 @@
 # html-template-tag
 
 [![version](https://img.shields.io/npm/v/html-template-tag.svg)](http://npm.im/html-template-tag)
-[![Travis](https://img.shields.io/travis/AntonioVdlC/html-template-tag.svg?branch=master)](https://travis-ci.org/AntonioVdlC/html-template-tag)
-[![Codecov](https://img.shields.io/codecov/c/github/AntonioVdlC/html-template-tag.svg)](https://codecov.io/github/AntonioVdlC/html-template-tag)
 [![issues](https://img.shields.io/github/issues-raw/antoniovdlc/html-template-tag.svg)](https://github.com/AntonioVdlC/html-template-tag/issues)
 [![downloads](https://img.shields.io/npm/dt/html-template-tag.svg)](http://npm.im/html-template-tag)
 [![license](https://img.shields.io/npm/l/html-template-tag.svg)](http://opensource.org/licenses/MIT)
@@ -17,10 +15,6 @@ This package is distributed via npm:
 npm install html-template-tag
 ```
 
-*- or -*
-
-Download the file `src/index.js` and add it to your ES6 project.
-
 ## Usage
 
 ### String Interpolation
@@ -28,8 +22,8 @@ Download the file `src/index.js` and add it to your ES6 project.
 At its core, this module just performs simple ES6 string interpolation.
 
 ```javascript
-var html = require("html-template-tag");
-// - or - import html from "html-template-tag";
+var { html } = require("html-template-tag");
+// - or - import { html } from "html-template-tag";
 
 var name = `Antonio`;
 var string = html`Hello, ${name}!`;
@@ -39,8 +33,8 @@ var string = html`Hello, ${name}!`;
 Nevertheless, it escapes HTML special characters without refraining its use in loops!
 
 ```javascript
-var html = require("html-template-tag");
-// - or - import html from "html-template-tag";
+var { html } = require("html-template-tag");
+// - or - import { html } from "html-template-tag";
 
 var names = ["Antonio", "Megan", "/><script>alert('xss')</script>"];
 var string = html`
@@ -63,15 +57,13 @@ var string = html`Hello, $${name}!`;
 // "Hello, <strong>Antonio</strong>!"
 ```
 
-
-
 ### HTML Template Pre-Compiling
 
 This small module can also be used to pre-compile HTML templates:
 
 ```javascript
-var html = require("html-template-tag");
-// - or - import html from "html-template-tag";
+var { html } = require("html-template-tag");
+// - or - import { html } from "html-template-tag";
 
 var data = {
 	count: 2,
