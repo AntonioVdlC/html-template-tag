@@ -65,7 +65,7 @@ describe("html-template-tag", () => {
         </ul>
       </div>`
     ).toEqual(
-			`<div>
+      `<div>
         My best friends are:
         <ul>
           <li>Megan</li><li>Tiphaine</li><li>Florent</li><li>Hoan</li>
