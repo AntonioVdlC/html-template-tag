@@ -58,6 +58,6 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "html-es6cape": "^1.0.5"
+    "html-es6cape": "^2.0.0"
   }
 }
