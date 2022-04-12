@@ -1,4 +1,6 @@
-import html from "../src/index.ts";
+import { describe, it, expect } from "vitest";
+
+import html from "../src";
 
 describe("html-template-tag", () => {
   it("should return a string when passed a string literal", () => {
@@ -15,7 +17,7 @@ describe("html-template-tag", () => {
   });
 
   it("should escape HTML special characters", () => {
-    const chars = {
+    const chars: Record<string, string> = {
       "&": "&amp;",
       ">": "&gt;",
       "<": "&lt;",
