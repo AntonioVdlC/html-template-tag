@@ -75,4 +75,21 @@ describe("html-template-tag", () => {
       </div>`
     );
   });
+
+  it("should add quotes around alt attribute", () => {
+    const src = "https://example.com/image.jpg";
+    const alt = "Alt onload=alert(1)";
+    console.log(html`<img src="${src}" alt=${alt} />`);
+    expect(html`<img src="${src}" alt=${alt} />`).toEqual(
+      `<img src="https://example.com/image.jpg" alt="Alt onload=alert(1)" />`
+    );
+  });
+
+  it("should not add quotes around alt attribute if they are already present", () => {
+    const src = "https://example.com/image.jpg";
+    const alt = "Alt onload=alert(1)";
+    expect(html`<img src="${src}" alt="${alt}" />`).toEqual(
+      `<img src="https://example.com/image.jpg" alt="Alt onload=alert(1)" />`
+    );
+  });
 });
