@@ -1,8 +1,21 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import html from "../src";
+import { attributes, attributesUri } from "../src/attributes";
+
+const attributesNoUri = attributes.filter(
+  (attribute) => !attributesUri.includes(attribute)
+);
 
 describe("html-template-tag", () => {
+  const consoleWarnSpy = vi
+    .spyOn(console, "warn")
+    .mockImplementation(() => undefined);
+
+  beforeEach(() => {
+    consoleWarnSpy.mockReset();
+  });
+
   it("should return a string when passed a string literal", () => {
     expect(typeof html`Hello, world!`).toEqual("string");
   });
@@ -76,20 +89,37 @@ describe("html-template-tag", () => {
     );
   });
 
-  it("should add quotes around alt attribute", () => {
-    const src = "https://example.com/image.jpg";
-    const alt = "Alt onload=alert(1)";
-    console.log(html`<img src="${src}" alt=${alt} />`);
-    expect(html`<img src="${src}" alt=${alt} />`).toEqual(
-      `<img src="https://example.com/image.jpg" alt="Alt onload=alert(1)" />`
-    );
-  });
+  it.each(attributesNoUri)(
+    "should add quotes around attribute '%s'",
+    (attribute) => {
+      const value = "Alt onload=alert(1)";
+      expect(html`<div ${attribute}=${value} />`).toEqual(
+        `<div ${attribute}="Alt onload=alert(1)" />`
+      );
+    }
+  );
 
-  it("should not add quotes around alt attribute if they are already present", () => {
-    const src = "https://example.com/image.jpg";
-    const alt = "Alt onload=alert(1)";
-    expect(html`<img src="${src}" alt="${alt}" />`).toEqual(
-      `<img src="https://example.com/image.jpg" alt="Alt onload=alert(1)" />`
-    );
-  });
+  it.each(attributesNoUri)(
+    "should not add quotes around attribute '%s' if they are already present",
+    (attribute) => {
+      const value = "Alt onload=alert(1)";
+      expect(html`<div ${attribute}="${value}" />`).toEqual(
+        `<div ${attribute}="Alt onload=alert(1)" />`
+      );
+    }
+  );
+
+  it.each(attributesUri)(
+    "should remove the interpolation if preceeded by an attribute that takes a URI ('%s')",
+    (attribute) => {
+      const value = "some string";
+      expect(html`<div ${attribute}="${value}" />`).toEqual(
+        `<div ${attribute}="" />`
+      );
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        "[html-template-tag] Trying to interpolate inside an URI attribute. This can lead to security vulnerabilities. The interpolation has been removed.",
+        { acc: `<div ${attribute}="`, subst: value, lit: `" />` }
+      );
+    }
+  );
 });
