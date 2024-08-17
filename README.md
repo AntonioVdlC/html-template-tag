@@ -38,11 +38,9 @@ var html = require("html-template-tag");
 
 var names = ["Antonio", "Megan", "/><script>alert('xss')</script>"];
 var string = html`
-	<ul>
-		${names.map((name) => html`
-			<li>Hello, ${name}!</li>
-		`)}
-	</ul>
+  <ul>
+    ${names.map((name) => html` <li>Hello, ${name}!</li> `)}
+  </ul>
 `;
 // "<ul><li>Hello, Antonio!</li><li>Hello, Megan!</li><li>Hello, /&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;!</li></ul>"
 ```
@@ -66,16 +64,14 @@ var html = require("html-template-tag");
 // - or - import { html } from "html-template-tag";
 
 var data = {
-	count: 2,
-	names: ["Antonio", "Megan"]
+  count: 2,
+  names: ["Antonio", "Megan"],
 };
 
-var template = ({names}) => html`
-	<ul>
-		${names.map((name) => html`
-			<li>Hello, ${name}!</li>
-		`)}
-	</ul>
+var template = ({ names }) => html`
+  <ul>
+    ${names.map((name) => html` <li>Hello, ${name}!</li> `)}
+  </ul>
 `;
 
 var string = template(data);
@@ -88,10 +84,17 @@ var string = template(data);
 	"
 */
 ```
+
 > NB: The formating of the string literal is kept.
 
+### Interpolation inside URI attributes
+
+To avoid XSS attacks, this package removes all interpolation instide URI attributes ([more info](https://cheatsheetseries.owasp.org/cheatsheets/XSS_Filter_Evasion_Cheat_Sheet.html)). This package also ensures that interpolations inside attributes are properly escaped.
+
 ## License
+
 MIT
 
 ## Thanks
+
 The code for this module has been heavily inspired on [Axel Rauschmayer's post on HTML templating with ES6 template strings](http://www.2ality.com/2015/01/template-strings-html.html) and [Stefan Bieschewski's comment](http://www.2ality.com/2015/01/template-strings-html.html#comment-2078932192).
