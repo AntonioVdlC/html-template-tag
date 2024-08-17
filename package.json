@@ -58,6 +58,7 @@
     "vitest": "^0.9.3"
   },
   "dependencies": {
+    "html-element-attributes": "^3.4.0",
     "html-es6cape": "^2.0.0"
   }
 }
