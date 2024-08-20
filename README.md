@@ -23,7 +23,7 @@ At its core, this module just performs simple ES6 string interpolation.
 
 ```javascript
 var html = require("html-template-tag");
-// - or - import { html } from "html-template-tag";
+// - or - import html from "html-template-tag";
 
 var name = `Antonio`;
 var string = html`Hello, ${name}!`;
@@ -34,7 +34,7 @@ Nevertheless, it escapes HTML special characters without refraining its use in l
 
 ```javascript
 var html = require("html-template-tag");
-// - or - import { html } from "html-template-tag";
+// - or - import html from "html-template-tag";
 
 var names = ["Antonio", "Megan", "/><script>alert('xss')</script>"];
 var string = html`
@@ -61,7 +61,7 @@ This small module can also be used to pre-compile HTML templates:
 
 ```javascript
 var html = require("html-template-tag");
-// - or - import { html } from "html-template-tag";
+// - or - import html from "html-template-tag";
 
 var data = {
   count: 2,
