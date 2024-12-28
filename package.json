@@ -5,10 +5,23 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "exports":{
+    ".":{
+      "import": {
+        "types":"./dist/index.d.mts",
+        "default":"./dist/index.esm.js"
+      },
+      "require":{
+        "types":"./dist/index.d.ts",
+        "default":"./dist/index.cjs.js"
+      }
+    }
+  },
   "files": [
     "dist/index.cjs.js",
     "dist/index.esm.js",
-    "dist/index.d.ts"
+    "dist/index.d.ts",
+    "dist/index.d.mts"
   ],
   "scripts": {
     "prepare": "husky install",
@@ -19,7 +32,7 @@
     "pre-commit": "lint-staged",
     "prebuild": "rimraf dist && mkdir dist",
     "build": "npm run build:types && npm run build:lib",
-    "build:types": "tsc src/*.ts --declaration --emitDeclarationOnly --outDir dist",
+    "build:types": "tsc src/*.ts --declaration --emitDeclarationOnly --outDir dist && cp dist/index.d.ts dist/index.d.mts",
     "build:lib": "rollup -c",
     "postversion": "git push && git push --tags"
   },
