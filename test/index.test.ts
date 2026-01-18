@@ -122,4 +122,16 @@ describe("html-template-tag", () => {
       );
     }
   );
+
+  it("should not remove the interpolation inside a URI if preceeded by a $ sign", () => {
+    const value = "https://www.example.com/test=1234&54>6";
+
+    expect(html`<a href="$${value}}">link</a>`).toEqual(
+      '<a href="https://www.example.com/test=1234&54>6}">link</a>'
+    );
+
+    expect(html`<a href="$${html`${value}`}">link</a>`).toEqual(
+      '<a href="https://www.example.com/test=1234&amp;54&gt;6">link</a>'
+    );
+  });
 });

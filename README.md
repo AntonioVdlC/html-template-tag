@@ -91,6 +91,15 @@ var string = template(data);
 
 To avoid XSS attacks, this package removes all interpolation instide URI attributes ([more info](https://cheatsheetseries.owasp.org/cheatsheets/XSS_Filter_Evasion_Cheat_Sheet.html)). This package also ensures that interpolations inside attributes are properly escaped.
 
+If you want to interpolate inside a URI attribute, you need to skip autoescaping (make sure that the string is safe!):
+
+```javascript
+var url = "https://www.example.com/test=1234&54>6";
+var string = html`<a href="$${html`${value}`}">link</a>`;
+// "<a href="https://www.example.com/test=1234&amp;54&gt;6">link</a>"
+```
+Note that ``$${html`${value}`}`` isn't strictly necessary, but it allows the escaping of characters in the string inside the URI attribute. You could technically just use `$${value}` but make sure that `value` is properly escaped!
+
 ## License
 
 MIT
