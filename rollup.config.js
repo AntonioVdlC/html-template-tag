@@ -1,5 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 
 export default [
   {
@@ -9,7 +9,7 @@ export default [
       format: "cjs",
       exports: "default",
     },
-    external: ["html-es6cape"],
+    external: ["html-es6cape", "html-element-attributes"],
     plugins: [typescript(), terser()],
   },
   {
@@ -18,7 +18,7 @@ export default [
       file: "dist/index.esm.js",
       format: "es",
     },
-    external: ["html-es6cape"],
+    external: ["html-es6cape", "html-element-attributes"],
     plugins: [typescript(), terser()],
   },
 ];
