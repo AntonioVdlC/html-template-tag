@@ -35,10 +35,10 @@ export const attributesUri = [
 ];
 
 export const endsWithUriAttribute = function endsWithAttributes(
-  acc: string
+  acc: string,
 ): boolean {
   return attributesUri.some(
     (attribute) =>
-      acc.endsWith(`${attribute}=`) || acc.endsWith(`${attribute}="`)
+      acc.endsWith(`${attribute}=`) || acc.endsWith(`${attribute}="`),
   );
 };

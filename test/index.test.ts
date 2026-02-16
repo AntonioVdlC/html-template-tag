@@ -4,7 +4,7 @@ import html from "../src";
 import { attributes, attributesUri } from "../src/attributes";
 
 const attributesNoUri = attributes.filter(
-  (attribute) => !attributesUri.includes(attribute)
+  (attribute) => !attributesUri.includes(attribute),
 );
 
 describe("html-template-tag", () => {
@@ -47,7 +47,7 @@ describe("html-template-tag", () => {
   it("should skip escaping HTML special characters for substituitions with double $", () => {
     const safeString = "<strong>Antonio</strong>";
     expect(html`Hello, $${safeString}!`).toEqual(
-      "Hello, <strong>Antonio</strong>!"
+      "Hello, <strong>Antonio</strong>!",
     );
   });
 
@@ -56,16 +56,16 @@ describe("html-template-tag", () => {
     const unsafeString = " & €";
     const emptyString = "";
     expect(html`${insertedDollar}${unsafeString}!`).toEqual(
-      "I :heart: $ &amp; €!"
+      "I :heart: $ &amp; €!",
     );
     expect(html`${insertedDollar}${emptyString}${unsafeString}!`).toEqual(
-      "I :heart: $ &amp; €!"
+      "I :heart: $ &amp; €!",
     );
     expect(html`${insertedDollar}$${emptyString}${unsafeString}!`).toEqual(
-      "I :heart: $ &amp; €!"
+      "I :heart: $ &amp; €!",
     );
     expect(html`$${insertedDollar}${emptyString}${unsafeString}!`).toEqual(
-      "I :heart: $ &amp; €!"
+      "I :heart: $ &amp; €!",
     );
   });
 
@@ -78,14 +78,14 @@ describe("html-template-tag", () => {
         <ul>
           ${names.map((name) => html`<li>${name}</li>`)}
         </ul>
-      </div>`
+      </div>`,
     ).toEqual(
       `<div>
         My best friends are:
         <ul>
           <li>Megan</li><li>Tiphaine</li><li>Florent</li><li>Hoan</li>
         </ul>
-      </div>`
+      </div>`,
     );
   });
 
@@ -94,9 +94,9 @@ describe("html-template-tag", () => {
     (attribute) => {
       const value = "Alt onload=alert(1)";
       expect(html`<div ${attribute}=${value} />`).toEqual(
-        `<div ${attribute}="Alt onload=alert(1)" />`
+        `<div ${attribute}="Alt onload=alert(1)" />`,
       );
-    }
+    },
   );
 
   it.each(attributesNoUri)(
@@ -104,9 +104,9 @@ describe("html-template-tag", () => {
     (attribute) => {
       const value = "Alt onload=alert(1)";
       expect(html`<div ${attribute}="${value}" />`).toEqual(
-        `<div ${attribute}="Alt onload=alert(1)" />`
+        `<div ${attribute}="Alt onload=alert(1)" />`,
       );
-    }
+    },
   );
 
   it.each(attributesUri)(
@@ -114,24 +114,24 @@ describe("html-template-tag", () => {
     (attribute) => {
       const value = "some string";
       expect(html`<div ${attribute}="${value}" />`).toEqual(
-        `<div ${attribute}="" />`
+        `<div ${attribute}="" />`,
       );
       expect(consoleWarnSpy).toHaveBeenCalledWith(
         "[html-template-tag] Trying to interpolate inside an URI attribute. This can lead to security vulnerabilities. The interpolation has been removed. If you are sure you want to interpolate inside an URI attribute, please escape this interpolation with an extra '$' sign in front of it.",
-        { acc: `<div ${attribute}="`, subst: value, lit: `" />` }
+        { acc: `<div ${attribute}="`, subst: value, lit: `" />` },
       );
-    }
+    },
   );
 
   it("should not remove the interpolation inside a URI if preceeded by a $ sign", () => {
     const value = "https://www.example.com/test=1234&54>6";
 
     expect(html`<a href="$${value}}">link</a>`).toEqual(
-      '<a href="https://www.example.com/test=1234&54>6}">link</a>'
+      '<a href="https://www.example.com/test=1234&54>6}">link</a>',
     );
 
     expect(html`<a href="$${html`${value}`}">link</a>`).toEqual(
-      '<a href="https://www.example.com/test=1234&amp;54&gt;6">link</a>'
+      '<a href="https://www.example.com/test=1234&amp;54&gt;6">link</a>',
     );
   });
 });

@@ -50,7 +50,7 @@ function htmlTemplateTag(
     if (endsWithUriAttribute(acc) && shouldEscape) {
       console.warn(
         "[html-template-tag] Trying to interpolate inside an URI attribute. This can lead to security vulnerabilities. The interpolation has been removed. If you are sure you want to interpolate inside an URI attribute, please escape this interpolation with an extra '$' sign in front of it.",
-        { acc, subst, lit }
+        { acc, subst, lit },
       );
 
       subst = "";
