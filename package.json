@@ -1,6 +1,6 @@
 {
   "name": "html-template-tag",
-  "version": "4.1.1",
+  "version": "5.0.0",
   "description": "ES6 Tagged Template for compiling HTML template strings.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
