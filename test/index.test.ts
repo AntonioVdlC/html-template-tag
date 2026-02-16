@@ -117,9 +117,21 @@ describe("html-template-tag", () => {
         `<div ${attribute}="" />`
       );
       expect(consoleWarnSpy).toHaveBeenCalledWith(
-        "[html-template-tag] Trying to interpolate inside an URI attribute. This can lead to security vulnerabilities. The interpolation has been removed.",
+        "[html-template-tag] Trying to interpolate inside an URI attribute. This can lead to security vulnerabilities. The interpolation has been removed. If you are sure you want to interpolate inside an URI attribute, please escape this interpolation with an extra '$' sign in front of it.",
         { acc: `<div ${attribute}="`, subst: value, lit: `" />` }
       );
     }
   );
+
+  it("should not remove the interpolation inside a URI if preceeded by a $ sign", () => {
+    const value = "https://www.example.com/test=1234&54>6";
+
+    expect(html`<a href="$${value}}">link</a>`).toEqual(
+      '<a href="https://www.example.com/test=1234&54>6}">link</a>'
+    );
+
+    expect(html`<a href="$${html`${value}`}">link</a>`).toEqual(
+      '<a href="https://www.example.com/test=1234&amp;54&gt;6">link</a>'
+    );
+  });
 });

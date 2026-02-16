@@ -8,6 +8,7 @@ function htmlTemplateTag(
   ...substs: Array<string | string[]>
 ): string {
   return literals.raw.reduce((acc, lit, i) => {
+    let isEscaped = true;
     let subst = substs[i - 1];
     if (Array.isArray(subst)) {
       subst = subst.join("");
@@ -15,6 +16,7 @@ function htmlTemplateTag(
       // If the interpolation is preceded by a dollar sign,
       // substitution is considered safe and will not be escaped
       acc = acc.slice(0, -1);
+      isEscaped = false;
     } else {
       subst = escape(subst);
     }
@@ -41,9 +43,9 @@ function htmlTemplateTag(
      *
      * A warning is displayed in the console.
      */
-    if (endsWithUriAttribute(acc)) {
+    if (endsWithUriAttribute(acc) && isEscaped) {
       console.warn(
-        "[html-template-tag] Trying to interpolate inside an URI attribute. This can lead to security vulnerabilities. The interpolation has been removed.",
+        "[html-template-tag] Trying to interpolate inside an URI attribute. This can lead to security vulnerabilities. The interpolation has been removed. If you are sure you want to interpolate inside an URI attribute, please escape this interpolation with an extra '$' sign in front of it.",
         { acc, subst, lit }
       );
 
